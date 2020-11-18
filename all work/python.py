@@ -53,7 +53,7 @@ while num > 0:
 print(newNum)
 
 ########################################
-hepeBoD B tpouzhuyu cuctemy
+hepeBoD B tpouzhuyu cucTeMy
 
 a, b = map(int, input().split())
 def q(res):
@@ -77,3 +77,5 @@ def convert_base(num, to_base=10, from_base=3):
     else:
         return convert_base(n // to_base, to_base) + alphabet[n % to_base]
     ##############################################
+a = int(input())
+print(bin(a))
