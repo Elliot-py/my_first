@@ -1,2 +1,2 @@
 # my_first
-it i smy first work
+it is my first work
