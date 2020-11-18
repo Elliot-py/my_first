@@ -53,3 +53,27 @@ while num > 0:
 print(newNum)
 
 ########################################
+hepeBoD B tpouzhuyu cuctemy
+
+a, b = map(int, input().split())
+def q(res):
+    new = ''
+    while res:
+        new = str(res % 3) + new
+        res //= 3
+    return new
+print(int(q(a)))
+############################################
+def convert_base(num, to_base=10, from_base=3):
+    # first convert to decimal number
+    if isinstance(num, str):
+        n = int(num, from_base)
+    else:
+        n = int(num)
+    # now convert decimal to 'to_base' base
+    alphabet = "0123456789"
+    if n < to_base:
+        return alphabet[n]
+    else:
+        return convert_base(n // to_base, to_base) + alphabet[n % to_base]
+    ##############################################
