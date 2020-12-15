@@ -79,3 +79,12 @@ def convert_base(num, to_base=10, from_base=3):
     ##############################################
 a = int(input())
 print(bin(a))
+
+
+######################################
+nod chisel
+
+a, b = map(int, input().split())
+while b:
+        a,b = b, a % b
+print(a + b)
