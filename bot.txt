@@ -1,0 +1,60 @@
+#bot.send_message(message.chat.id, out)
+#bot.send_photo(message.chat.id, open('pas1.jpg', 'rb'))
+import telebot
+import subprocess
+check = True
+ism = True
+#file = open("input.txt", "rw", encoding='utf-8')
+with open("code.py", "w") as file:
+    file.write("import sys\ninp = open('input.txt', 'r', encoding='utf-8')\nout = open('output.txt', 'w')\nsys.stdin = inp\nsys.stdout = out\n")
+in_ = open("input.txt", "w")
+out_ = open("output.txt", "w")
+out_.close
+out_ = open("output.txt", "r", encoding = 'utf-8')
+
+token = "5068411638:AAHVXAOSFDgMOkE3Hwfsj0TuBB9020pTqfQ"
+
+bot = telebot.TeleBot(token)
+
+@bot.message_handler(content_types=["text"])
+
+def main(message):
+    data = message.text
+    print(data)
+    global check
+    if data == "/start":
+        bot.send_message(message.chat.id, "Hello. It is python bot. You can write your programm here, and it will compile it. Jut try. Good luck. :D\nWrite [RUN] in new line to compile.")
+    
+    if data != "RUN" and check == True:
+        if data != "/start":
+            with open("code.py", "a") as file:
+                file.write(data + "\n")
+        
+    else:
+        check = False
+        ask(data, message)
+        
+def ask(data, message):
+    global ism
+    if ism:
+        bot.send_message(message.chat.id, "do you want to create input.txt? [Y,N], do not write 'RUN', 'NEXT' for continue")
+        ism = False
+    if data != "Y" and data != "NEXT" and data != "RUN" and data != "N":
+        with open("input.txt", "a") as in_:
+            in_.write(data + "\n")
+    if data == "N" or data == "NEXT":
+        answer(message)
+def answer(message):
+    global out_
+    subprocess.call("python code.py", shell = True)
+    ans = out_.read()
+    bot.send_message(message.chat.id, "--------------------------------------------------")
+    if ans == "":
+        bot.send_message(message.chat.id, "Empty")
+    else:
+        bot.send_message(message.chat.id, ans)
+    bot.send_message(message.chat.id, "--------------------------------------------------")
+    bot.send_message(message.chat.id, "DONE")
+if __name__ == '__main__':
+     bot.infinity_polling()
+
